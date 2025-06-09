@@ -1,28 +1,19 @@
 {
-  "timestamp": "2025-06-09T10:46:05.488Z",
+  "timestamp": "2025-06-09T14:14:48.348Z",
   "yourName": "Nguyễn Cao Đức",
   "herName": "Khánh Hằng Chần",
   "offenses": [
-    "Gửi meme lúc đang học",
     "Nói chuyện vô duyên",
-    "Làm phiền khi đang bận"
+    "Đùa không vui"
   ],
   "punishments": [
     {
-      "icon": "📱",
-      "text": "Nhắn tin xin lỗi ít nhất 3 từ"
-    },
-    {
       "icon": "⏰",
-      "text": "Không làm phiền trong vòng 24h (hoặc 24 phút nếu được khoan hồng)"
-    },
-    {
-      "icon": "🎁",
-      "text": "Tặng một món quà nhỏ"
+      "text": "Không làm phiền trong vòng 24h (hoặc 0 phút nếu được khoan hồng)"
     },
     {
       "icon": "🥤",
-      "text": "Mua trà sữa hoặc chocolate"
+      "text": "N ly matcha latte"
     }
   ]
 }
