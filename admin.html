@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin Panel - Phiên Tòa Xét Xử</title>
+		<link rel="stylesheet" href="style.css" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			.admin-container {
+			    max-width: 800px;
+			    margin: 2rem auto;
+			    padding: 2rem;
+			    background: white;
+			    border-radius: 20px;
+			    box-shadow: 0 10px 30px var(--shadow-color);
+			}
+
+			.admin-header {
+			    text-align: center;
+			    margin-bottom: 2rem;
+			    padding-bottom: 1rem;
+			    border-bottom: 2px solid var(--accent-color);
+			}
+
+			.admin-section {
+			    margin-bottom: 2rem;
+			    padding: 1.5rem;
+			    background: var(--background-color);
+			    border-radius: 15px;
+			}
+
+			.admin-section h2 {
+			    color: var(--primary-color);
+			    margin-bottom: 1rem;
+			    font-family: 'Playfair Display', serif;
+			}
+
+			.config-item {
+			    display: flex;
+			    align-items: center;
+			    margin-bottom: 1rem;
+			    padding: 1rem;
+			    background: white;
+			    border-radius: 10px;
+			    box-shadow: 0 2px 5px var(--shadow-color);
+			}
+
+			.config-label {
+			    flex: 1;
+			    font-weight: 500;
+			    color: var(--text-color);
+			}
+
+			.config-value {
+			    flex: 2;
+			    color: var(--primary-color);
+			}
+
+			.offense-list, .punishment-list {
+			    list-style: none;
+			    padding: 0;
+			}
+
+			.offense-list li, .punishment-list li {
+			    padding: 0.8rem;
+			    margin-bottom: 0.5rem;
+			    background: white;
+			    border-radius: 8px;
+			    display: flex;
+			    align-items: center;
+			    gap: 1rem;
+			}
+
+			.stats {
+			    display: grid;
+			    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			    gap: 1rem;
+			    margin-top: 1rem;
+			}
+
+			.stat-card {
+			    background: white;
+			    padding: 1rem;
+			    border-radius: 10px;
+			    text-align: center;
+			    box-shadow: 0 2px 5px var(--shadow-color);
+			}
+
+			.stat-value {
+			    font-size: 2rem;
+			    color: var(--primary-color);
+			    font-weight: bold;
+			    margin: 0.5rem 0;
+			}
+
+			.stat-label {
+			    color: var(--text-color);
+			    font-size: 0.9rem;
+			}
+
+			.refresh-button {
+			    background: var(--primary-color);
+			    color: white;
+			    border: none;
+			    padding: 0.8rem 1.5rem;
+			    border-radius: 10px;
+			    cursor: pointer;
+			    font-size: 1.1rem;
+			    transition: all 0.3s ease;
+			    display: block;
+			    margin: 1rem auto;
+			}
+
+			.refresh-button:hover {
+			    transform: translateY(-2px);
+			    box-shadow: 0 5px 15px var(--shadow-color);
+			}
+
+			.timestamp {
+			    text-align: center;
+			    color: var(--text-color);
+			    font-size: 0.9rem;
+			    margin-top: 1rem;
+			}
+
+			.offense-list li {
+			    display: flex;
+			    align-items: center;
+			    gap: 1rem;
+			    padding: 1rem;
+			    background: white;
+			    border-radius: 8px;
+			    margin-bottom: 0.5rem;
+			    box-shadow: 0 2px 5px var(--shadow-color);
+			}
+
+			.offense-number {
+			    color: var(--primary-color);
+			    font-weight: bold;
+			    min-width: 2rem;
+			}
+
+			.offense-text {
+			    flex: 1;
+			}
+
+			.pardon-status {
+			    background: white;
+			    padding: 1.5rem;
+			    border-radius: 10px;
+			    box-shadow: 0 2px 5px var(--shadow-color);
+			}
+
+			.status-message {
+			    color: var(--text-color);
+			    font-size: 1.1rem;
+			    text-align: center;
+			}
+
+			.pardon-info {
+			    margin-top: 1rem;
+			    padding-top: 1rem;
+			    border-top: 1px solid var(--border-color);
+			}
+
+			.pardon-info p {
+			    margin: 0.5rem 0;
+			    color: var(--text-color);
+			}
+
+			.pardon-info .highlight {
+			    color: var(--primary-color);
+			    font-weight: 500;
+			}
+
+			.pardon-info .timestamp {
+			    font-size: 0.9rem;
+			    color: var(--text-color);
+			    opacity: 0.8;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="admin-container">
+			<div class="admin-header">
+				<h1>Admin Panel</h1>
+				<p>Quản lý cấu hình phiên tòa</p>
+			</div>
+
+			<div class="admin-section">
+				<h2>Thông Tin Cơ Bản</h2>
+				<div class="config-item">
+					<span class="config-label">Bị Cáo:</span>
+					<span class="config-value" id="admin-your-name"></span>
+				</div>
+				<div class="config-item">
+					<span class="config-label">Chủ Tọa:</span>
+					<span class="config-value" id="admin-her-name"></span>
+				</div>
+			</div>
+
+			<div class="admin-section">
+				<h2>Danh Sách Tội Danh</h2>
+				<ul class="offense-list" id="admin-offenses"></ul>
+			</div>
+
+			<div class="admin-section">
+				<h2>Danh Sách Hình Phạt</h2>
+				<ul class="punishment-list" id="admin-punishments"></ul>
+			</div>
+
+			<div class="admin-section">
+				<h2>Thống Kê</h2>
+				<div class="stats">
+					<div class="stat-card">
+						<div class="stat-value" id="total-offenses">0</div>
+						<div class="stat-label">Tổng số tội danh</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-value" id="total-punishments">0</div>
+						<div class="stat-label">Tổng số hình phạt</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="admin-section">
+				<h2>Trạng Thái Ân Xá</h2>
+				<div id="pardon-status" class="pardon-status">
+					<div class="status-message">
+						Chưa có quyết định ân xá nào
+					</div>
+				</div>
+			</div>
+
+			<button class="refresh-button" id="refresh-button">
+				<span class="button-icon">🔄</span>
+				Làm mới dữ liệu
+			</button>
+
+			<div class="timestamp" id="last-updated"></div>
+		</div>
+
+		<script src="config.js"></script>
+		<script>
+			// Hàm để tải lại file config.js
+			function reloadConfig() {
+			    return new Promise((resolve, reject) => {
+			        // Xóa script cũ nếu có
+			        const oldScript = document.querySelector('script[src^="config.js"]');
+			        if (oldScript) {
+			            oldScript.remove();
+			        }
+
+			        // Tạo script mới
+			        const script = document.createElement('script');
+			        script.src = 'config.js?' + new Date().getTime();
+			        script.onload = () => {
+			            // Đợi một chút để đảm bảo config đã được tải
+			            setTimeout(() => {
+			                if (typeof config !== 'undefined') {
+			                    resolve();
+			                } else {
+			                    reject(new Error('Không thể tải cấu hình'));
+			                }
+			            }, 100);
+			        };
+			        script.onerror = reject;
+			        document.body.appendChild(script);
+			    });
+			}
+
+			// Hàm để cập nhật giao diện
+			function updateAdminPanel() {
+			    if (typeof config === 'undefined') {
+			        console.error('Config chưa được tải');
+			        return;
+			    }
+
+			    try {
+			        // Cập nhật thông tin cơ bản
+			        document.getElementById('admin-your-name').textContent = config.yourName || 'Chưa có';
+			        document.getElementById('admin-her-name').textContent = config.herName || 'Chưa có';
+
+			        // Cập nhật danh sách tội danh
+			        const offensesList = document.getElementById('admin-offenses');
+			        offensesList.innerHTML = '';
+			        if (Array.isArray(config.offenses) && config.offenses.length > 0) {
+			            config.offenses.forEach((offense, index) => {
+			                const li = document.createElement('li');
+			                li.innerHTML = `
+			                    <span class="offense-number">${index + 1}.</span>
+			                    <span class="offense-text">${offense}</span>
+			                `;
+			                offensesList.appendChild(li);
+			            });
+			        } else {
+			            const li = document.createElement('li');
+			            li.textContent = 'Chưa có tội danh nào';
+			            offensesList.appendChild(li);
+			        }
+
+			        // Cập nhật danh sách hình phạt
+			        const punishmentsList = document.getElementById('admin-punishments');
+			        punishmentsList.innerHTML = '';
+			        if (Array.isArray(config.punishments) && config.punishments.length > 0) {
+			            config.punishments.forEach((punishment, index) => {
+			                const li = document.createElement('li');
+			                li.innerHTML = `
+			                    <span class="punishment-number">${index + 1}.</span>
+			                    <span class="punishment-icon">${punishment.icon || '⚖️'}</span>
+			                    <span class="punishment-text">${punishment.text || 'Chưa có mô tả'}</span>
+			                `;
+			                punishmentsList.appendChild(li);
+			            });
+			        } else {
+			            const li = document.createElement('li');
+			            li.textContent = 'Chưa có hình phạt nào';
+			            punishmentsList.appendChild(li);
+			        }
+
+			        // Cập nhật thống kê
+			        document.getElementById('total-offenses').textContent =
+			            Array.isArray(config.offenses) ? config.offenses.length : 0;
+			        document.getElementById('total-punishments').textContent =
+			            Array.isArray(config.punishments) ? config.punishments.length : 0;
+
+			        // Cập nhật thời gian
+			        const now = new Date();
+			        document.getElementById('last-updated').textContent =
+			            `Cập nhật lần cuối: ${now.toLocaleString('vi-VN')}`;
+			    } catch (error) {
+			        console.error('Lỗi khi cập nhật giao diện:', error);
+			        alert('Có lỗi xảy ra khi cập nhật giao diện. Vui lòng thử lại.');
+			    }
+			}
+
+			// Hàm để cập nhật trạng thái ân xá
+			async function updatePardonStatus() {
+			    const pardonStatus = document.getElementById('pardon-status');
+
+			    try {
+			        const response = await fetch('/get-status');
+			        const data = await response.json();
+
+			        if (data.timestamp) {
+			            const date = new Date(data.timestamp);
+			            pardonStatus.innerHTML = `
+			                <div class="status-message">✅ Đã có quyết định ân xá!</div>
+			                <div class="pardon-info">
+			                    <p>Bị cáo: <span class="highlight">${data.yourName}</span></p>
+			                    <p>Chủ tọa: <span class="highlight">${data.herName}</span></p>
+			                    <p class="timestamp">Thời gian: ${date.toLocaleString('vi-VN')}</p>
+			                </div>
+			            `;
+			        } else {
+			            pardonStatus.innerHTML = `
+			                <div class="status-message">⏳ Chưa có quyết định ân xá nào</div>
+			            `;
+			        }
+			    } catch (error) {
+			        console.error('Lỗi khi đọc trạng thái:', error);
+			        pardonStatus.innerHTML = `
+			            <div class="status-message">❌ Lỗi khi đọc trạng thái</div>
+			        `;
+			    }
+			}
+
+			// Cập nhật lần đầu khi trang được tải
+			document.addEventListener('DOMContentLoaded', () => {
+			    if (typeof config === 'undefined') {
+			        console.error('Config chưa được tải khi khởi động');
+			        return;
+			    }
+			    updateAdminPanel();
+			    updatePardonStatus();
+			});
+
+			// Cập nhật khi nhấn nút refresh
+			document.getElementById('refresh-button').addEventListener('click', async () => {
+			    try {
+			        // Thêm hiệu ứng loading
+			        const button = document.getElementById('refresh-button');
+			        const originalText = button.innerHTML;
+			        button.innerHTML = '🔄 Đang tải...';
+			        button.disabled = true;
+
+			        // Tải lại config và cập nhật giao diện
+			        await reloadConfig();
+			        await updateAdminPanel();
+			        await updatePardonStatus();
+
+			        // Khôi phục nút
+			        button.innerHTML = originalText;
+			        button.disabled = false;
+			    } catch (error) {
+			        console.error('Lỗi khi tải lại dữ liệu:', error);
+			        alert('Có lỗi xảy ra khi tải lại dữ liệu. Vui lòng thử lại.');
+
+			        // Khôi phục nút trong trường hợp lỗi
+			        const button = document.getElementById('refresh-button');
+			        button.innerHTML = originalText;
+			        button.disabled = false;
+			    }
+			});
+
+			// Tự động cập nhật mỗi 30 giây
+			setInterval(async () => {
+			    try {
+			        await reloadConfig();
+			        await updateAdminPanel();
+			        await updatePardonStatus();
+			    } catch (error) {
+			        console.error('Lỗi khi tự động cập nhật:', error);
+			    }
+			}, 30000);
+		</script>
+	</body>
+</html>

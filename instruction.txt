@@ -1,0 +1,77 @@
+DỰ ÁN: HỘI ĐỒNG XÉT DUYỆT LỖI LẦM
+------------------------------------
+
+🎯 Mục tiêu:
+Tạo một trang web vui nhộn giả lập "phiên tòa công lý", trong đó bạn là bị cáo, cô gái bạn muốn xin lỗi là chủ tọa. Web sẽ đóng vai trò là biên bản ghi nhận tội trạng và đưa ra quyết định khoan hồng.
+
+------------------------------------
+📦 Nội dung hiển thị trên web:
+
+TIÊU ĐỀ:
+PHIÊN TÒA XÉT XỬ HÀNH VI GÂY KHÓ CHỊU
+
+BIÊN BẢN XÉT XỬ:
+Ngày: [hiển thị ngày hiện tại]
+
+Bị cáo: Nguyễn Cao Đức
+Tội danh: Gây bực mình cho bạn nữ [Tên bạn ấy]
+Hành vi: [Điền vào, ví dụ: gửi meme lúc đang học, nói chuyện vô duyên, ... ]
+
+Lời biện hộ:
+“Tôi không cố ý đâu ạ. Mong được xem xét khoan hồng.”
+
+Mức phạt đề nghị:
+- Nhắn tin xin lỗi ít nhất 3 từ
+- Không làm phiền trong vòng 24h (hoặc 24 phút nếu được khoan hồng)
+
+[NÚT]: 👉 Nhấn vào đây để xem xét ân xá 👈
+
+SAU KHI NHẤN:
+Tòa đã xem xét và quyết định:
+- Nếu bạn cười một cái → miễn phạt 80%
+- Nếu rep tin nhắn → miễn 100%
+
+------------------------------------
+🎁 Phần thưởng dành cho Chủ tọa:
+
+🎉 Cảm ơn Chủ tọa [Tên bạn ấy] đã xem xét vụ án này!
+Bạn có quyền nhận một món quà bất kỳ từ bị cáo trong vòng 7 ngày.
+
+------------------------------------
+🛠 Cách sử dụng:
+
+Bước 1: Tải toàn bộ mã nguồn về máy (hoặc clone git nếu có)
+Bước 2: Mở file config.js và chỉnh sửa các thông tin sau:
+
+  yourName: "Nguyễn Cao Đức"
+  herName: "Tên bạn ấy"
+  offense: "Hành vi khiến cô ấy giận"
+
+Bước 3: Mở file index.html bằng trình duyệt hoặc dùng VS Code + Live Server.
+
+------------------------------------
+🚀 Tùy chọn triển khai:
+
+- Dùng Vercel hoặc Netlify để upload online.
+- Gửi link cho bạn ấy kèm lời nhắn xin khoan hồng.
+
+------------------------------------
+🧠 Gợi ý mở rộng (không bắt buộc):
+
+- Thêm hoạt ảnh gõ búa xử án
+- Thêm tiếng "Toang!" khi đọc tội
+- Countdown thời gian “cấm làm phiền”
+- Giao diện hoạt hình/cổ trang
+
+------------------------------------
+📁 Cấu trúc file:
+
+court-of-sorry/
+├── index.html         (giao diện chính)
+├── style.css          (thiết kế)
+├── script.js          (xử lý nút ân xá)
+├── config.js          (cá nhân hóa tên, lỗi, lý do)
+└── README.txt         (file hướng dẫn này)
+
+------------------------------------
+Chúc bạn được tha bổng và cười lại sớm 😄

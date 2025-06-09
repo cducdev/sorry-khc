@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Phiên Tòa Xét Xử Hành Vi Gây Khó Chịu</title>
+		<link rel="stylesheet" href="style.css" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="stars"></div>
+		<div class="container">
+			<div class="header">
+				<div class="judge-avatar">
+					<img
+						src="https://api.dicebear.com/7.x/bottts/svg?seed=judge"
+						alt="Chủ tọa"
+					/>
+				</div>
+				<h1>PHIÊN TÒA XÉT XỬ</h1>
+				<div class="defendant-avatar">
+					<img
+						src="https://api.dicebear.com/7.x/bottts/svg?seed=defendant"
+						alt="Bị cáo"
+					/>
+				</div>
+			</div>
+
+			<div class="court-record">
+				<div class="date-badge">
+					<span class="date-icon">📅</span>
+					<span id="current-date"></span>
+				</div>
+
+				<div class="case-info">
+					<div class="info-card defendant">
+						<div class="card-icon">👨‍⚖️</div>
+						<h3>Bị Cáo</h3>
+						<p id="your-name"></p>
+					</div>
+
+					<div class="info-card victim">
+						<div class="card-icon">👩‍⚖️</div>
+						<h3>Chủ Tọa</h3>
+						<p id="her-name"></p>
+					</div>
+				</div>
+
+				<div class="offense-card">
+					<div class="card-icon">⚖️</div>
+					<h3>Tội Danh</h3>
+					<div class="offense-list">
+						<ul id="offense-list">
+							<!-- Danh sách tội danh sẽ được thêm vào đây bằng JavaScript -->
+						</ul>
+					</div>
+					<div class="offense-editor">
+						<button id="edit-offense" class="edit-button">
+							<span class="button-icon">✏️</span>
+							Thêm tội danh
+						</button>
+						<div id="offense-form" class="offense-form hidden">
+							<div class="form-group">
+								<input
+									type="text"
+									id="new-offense"
+									placeholder="Nhập tội danh mới"
+								/>
+								<button id="add-offense" class="add-button">
+									Thêm
+								</button>
+							</div>
+							<div id="offense-items" class="offense-items">
+								<!-- Các tội danh sẽ được hiển thị ở đây -->
+							</div>
+							<div class="form-actions">
+								<button id="save-offenses" class="save-button">
+									Lưu thay đổi
+								</button>
+								<button
+									id="cancel-offense-edit"
+									class="cancel-button"
+								>
+									Hủy
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="defense-card">
+					<div class="card-icon">🙏</div>
+					<h3>Lời Biện Hộ</h3>
+					<p class="defense-text">
+						"Tôi không cố ý đâu ạ. Mong được xem xét khoan hồng."
+					</p>
+				</div>
+
+				<div class="punishment-card">
+					<div class="card-icon">📜</div>
+					<h3>Mức Phạt Đề Nghị</h3>
+					<ul class="punishment-list" id="punishment-list">
+						<!-- Sẽ được điền bởi JavaScript -->
+					</ul>
+					<div class="punishment-editor">
+						<button id="edit-punishments" class="edit-button">
+							<span class="button-icon">✏️</span>
+							Chỉnh sửa mức phạt
+						</button>
+						<div
+							id="punishment-form"
+							class="punishment-form hidden"
+						>
+							<div class="form-group">
+								<input
+									type="text"
+									id="punishment-icon"
+									placeholder="Nhập icon (ví dụ: 📱)"
+									maxlength="2"
+								/>
+								<input
+									type="text"
+									id="punishment-text"
+									placeholder="Nhập nội dung mức phạt"
+								/>
+								<button id="add-punishment" class="add-button">
+									Thêm
+								</button>
+							</div>
+							<div id="punishment-items" class="punishment-items">
+								<!-- Các mức phạt sẽ được hiển thị ở đây -->
+							</div>
+							<div class="form-actions">
+								<button
+									id="save-punishments"
+									class="save-button"
+								>
+									Lưu thay đổi
+								</button>
+								<button id="cancel-edit" class="cancel-button">
+									Hủy
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<button id="pardon-button" class="pardon-button">
+					<span class="button-icon">✨</span>
+					Nhấn vào đây để xem xét ân xá
+					<span class="button-icon">✨</span>
+				</button>
+
+				<div id="verdict" class="verdict hidden">
+					<div class="verdict-header">
+						<div class="card-icon">🎉</div>
+						<h3>Tòa Đã Xem Xét Và Quyết Định</h3>
+					</div>
+					<ul class="verdict-list">
+						<li>😊 Nếu bạn cười một cái → miễn phạt 80%</li>
+						<li>💌 Nếu rep tin nhắn → miễn 100%</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="reward-section" class="reward-section hidden">
+				<div class="reward-card">
+					<div class="card-icon">🎁</div>
+					<h2>Phần Thưởng Dành Cho Chủ Tọa</h2>
+					<p class="reward-text">
+						🎉 Cảm ơn Chủ tọa <span id="her-name-reward"></span> đã
+						xem xét vụ án này!
+					</p>
+					<p class="reward-text">
+						Bạn có quyền nhận một món quà bất kỳ từ bị cáo trong
+						vòng 7 ngày.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Popup Modal -->
+		<div id="popup-modal" class="popup-modal hidden">
+			<div class="popup-content">
+				<div class="popup-header">
+					<div class="popup-icon">🎉</div>
+					<h2>Kết Quả Xét Xử</h2>
+					<button class="close-button">×</button>
+				</div>
+				<div class="popup-body">
+					<div class="verdict-content">
+						<h3>Quyết định của Tòa</h3>
+						<p>Nếu bạn cười một cái → miễn phạt 80%</p>
+						<p>Nếu rep tin nhắn → miễn 100%</p>
+					</div>
+					<div class="reward-content">
+						<h3>🎁 Phần thưởng dành cho Chủ tọa</h3>
+						<p>
+							Cảm ơn Chủ tọa <span id="her-name-popup"></span> đã
+							xem xét vụ án này!
+						</p>
+						<p>
+							Bạn có quyền nhận một món quà bất kỳ từ bị cáo trong
+							vòng 7 ngày.
+						</p>
+						<h3
+							style="align-items: center; text-align: center; margin: 2em;"
+						>
+							Dưới đây là món quà bạn chắc chắn nhận được
+						</h3>
+
+						<div class="gift-box" id="gift-box">
+							<div class="gift-box-lid">
+								<div class="gift-box-bow"></div>
+							</div>
+							<div class="gift-box-body">
+								<div class="gift-box-tag">Click để mở</div>
+							</div>
+						</div>
+
+						<div class="matcha-latte hidden" id="matcha-latte">
+							<div class="matcha-cup">
+								<div class="matcha-foam"></div>
+								<div class="matcha-bubble bubble1"></div>
+								<div class="matcha-bubble bubble2"></div>
+								<div class="matcha-bubble bubble3"></div>
+							</div>
+							<div class="matcha-straw"></div>
+							<div class="matcha-text">Matcha Latte</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="config.js"></script>
+		<script src="script.js"></script>
+	</body>
+</html>
+
+<style>
+	.offense-list {
+		margin-top: 1rem;
+	}
+
+	.offense-list ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	.offense-list li {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.8rem;
+		margin-bottom: 0.5rem;
+		background: var(--background-color);
+		border-radius: 8px;
+		transition: all 0.3s ease;
+	}
+
+	.offense-list li:hover {
+		transform: translateX(5px);
+		background: var(--accent-color);
+		color: white;
+	}
+
+	.offense-number {
+		color: var(--primary-color);
+		font-weight: bold;
+		min-width: 2rem;
+	}
+
+	.offense-text {
+		flex: 1;
+	}
+</style>
